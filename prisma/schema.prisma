@@ -15,9 +15,29 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-
   email String @unique
   password String
-
   name String
 }
+
+model Task {
+  id Int @id @default(autoincrement())
+  title String
+  content String?
+  created_by String
+  atribuited_to String
+  status String @default("A FAZER")
+  board KanbanBoard @relation(fields: [boardId], references : [id])
+  boardId Int @map("board")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model KanbanBoard {
+  id Int @id @default(autoincrement()) @map("_id")
+  name String
+  userId Int
+  createAt DateTime @default(now())
+  tasks Task[]
+}
+
