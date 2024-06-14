@@ -26,7 +26,7 @@ model Task {
   content String?
   created_by String
   atribuited_to String
-  status String @default("A FAZER")
+  status String @default("TODO")
   board KanbanBoard @relation(fields: [boardId], references : [id])
   boardId Int @map("board")
   createdAt DateTime @default(now())
